@@ -20,6 +20,10 @@ class Kategori extends MY_Controller {
     $this->template->views($data);
   }
 
+  public function tes(){
+    $data['content'] = 'Kategori/tes';
+    $this->template->views($data);
+  }
 
   public function tambah(){
     $data['title'] ='Tambah Kategori';

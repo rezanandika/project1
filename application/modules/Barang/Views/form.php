@@ -39,11 +39,10 @@
                   <label>Kategori</label>
                   <select class="form-control" name="kategori">
                     <option>Pilih Kategori</option>
-                    <option>PC</option>
-                    <option>LAPTOP</option>
-                    <option>PRINTER</option>
-                    <option>SCANNER</option>
-                    <option>LCD TV</option>
+                     <?php foreach($kat as $d){ ?>
+                    <tr align="left">
+                    <option><?php echo $d->nama ?></option>
+                    <?php } ?>
                   </select>
                 </div>
                 <div class="form-group">

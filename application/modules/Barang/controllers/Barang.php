@@ -11,7 +11,6 @@ class Barang extends MY_Controller {
   }
  
    function index(){
-   
 
     $data = array();
 	 
@@ -24,13 +23,16 @@ class Barang extends MY_Controller {
 
   public function tambah(){
     $data['title'] ='Tambah Data Barang';
-
     $data['content'] = 'Barang/form';
-
     $data['state'] = 'insert';
 
-    $this->template->views($data);
     $this->load->module('kategori');
+    $this->load->model('kategori_model');
+    //modules::run('kategori');
+    //$this->kategori->index();
+    
+    $this->template->views($data);
+    
   }
 
   function insert(){
