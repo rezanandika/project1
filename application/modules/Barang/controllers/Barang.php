@@ -30,6 +30,7 @@ class Barang extends MY_Controller {
     $data['state'] = 'insert';
 
     $this->template->views($data);
+    $this->load->module('kategori');
   }
 
   function insert(){
