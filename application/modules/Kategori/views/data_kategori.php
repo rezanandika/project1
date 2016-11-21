@@ -26,7 +26,8 @@
                     <tr align="left">
                       <td><?php echo $k['id_kategori']; ?></td>
                       <td><?php echo $k['nama'] ?></td>
-                      <td><a href="#" title="Edit"><i class="fa fa-pencil text-primary"></i></a> <a href="#" title="Hapus"><i class="fa fa-trash text-danger"></i></a></td>
+                      <td><a href="#" title="Edit"><i class="fa fa-pencil text-primary"></i></a> 
+                      <a href="<?php echo base_url(). 'index.php/kategori/delete/' .$k['id_kategori'] ?>" title="Hapus"><i class="fa fa-trash text-danger"></i></a></td>
                     </tr>
                <?php } ?>
              
@@ -47,7 +48,7 @@
 <script>
       $(function () {
         $('#example2').DataTable({
-          "pageLength": 5,
+          "pageLength": 15,
         });
         
       });

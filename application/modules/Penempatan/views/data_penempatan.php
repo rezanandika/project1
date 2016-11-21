@@ -2,8 +2,18 @@
 <link rel="stylesheet" href="<?php echo base_url('template/admin_lte'); ?>/plugins/datatables/dataTables.bootstrap.css">
  
 <section class="content">
-
+  <label>Lokasi Ruang</label>
+                  <select class="form-control" name="lokasi">
+                    <option>Pilih Lokasi</option>
+                     <?php foreach($lokasi as $d){ ?>
+                    <tr align="left">
+                    <option><?php echo $d->nama ?></option>
+                    <?php } ?>
+                  </select>
+                </br>
+              </br>
       <div class="row">
+
         <div class="col-xs-12">
          
           <div class="box">
@@ -16,19 +26,22 @@
               <table id="example2" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th>Kode Lokasi</th>
-                  <th>Nama Lokasi</th>
+                  <th>Kode Penempatan</th>
+                  <th>Tanggal Penempatan</th>
+                  <th>Kode lokasi</th>
+                  <th>Kode Detail</th>
                   <th>Aksi</th>
                 </tr>
                 </thead>
               <tbody>
 
-                 <?php foreach($lokasi as $l){ ?>
+                 <?php foreach($penempatan as $p){ ?>
                     <tr align="left">
-                      <td><?php echo $l['id_lokasi']; ?></td>
-                      <td><?php echo $l['nama']; ?></td>
-                      <td><a href="#" title="Edit"><i class="fa fa-pencil text-primary"></i></a> 
-                      <a href="<?php echo base_url(). 'index.php/lokasi/delete/' .$l['id_lokasi'] ?>" title="Hapus"><i class="fa fa-trash text-danger"></i></a></td>
+                      <td><?php echo $p['id_penempatan']; ?></td>
+                      <td><?php echo $p['tgl_penempatan']; ?></td>
+                      <td><?php echo $p['id_lokasi']; ?></td>
+                      <td><?php echo $p['id_detail']; ?></td>
+                      <td><a href="#" title="Edit"><i class="fa fa-pencil text-primary"></i></a> <a href="#" title="Hapus"><i class="fa fa-trash text-danger"></i></a></td>
                     </tr>
                <?php } ?>
              

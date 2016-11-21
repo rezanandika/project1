@@ -24,5 +24,10 @@ class barang_model extends MY_Model{
    }*/
     protected $_table     = 'barang';
     protected $_primary_key = 'id_barang';
+
+    function hapus_data($where, $table){
+      $this->db->where($where);
+      $this->db->delete($table);
+    }
 }
 ?>

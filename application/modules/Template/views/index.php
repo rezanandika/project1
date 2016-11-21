@@ -54,7 +54,8 @@
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <img src="#" class="user-image" alt="User Image"/>
-                  <span class="hidden-xs"><?php echo $this->session->userdata('name'); ?></span>
+                  <!-- <span class="hidden-xs"><?php echo $this->session->userdata('name'); ?></span> -->
+                  <span class="hidden-xs">Reza</span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
@@ -96,7 +97,8 @@
               <img src="" class="img-circle" alt="User Image" />
             </div>
             <div class="pull-left info">
-              <p><?php echo $this->session->userdata('name'); ?></p>
+              <p>Reza</p>
+              <!-- <p><?php echo $this->session->userdata('name'); ?></p> -->
 
               <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
@@ -142,7 +144,7 @@
           </a>
         </li>
          <li class="treeview">
-          <a href="#">
+          <a href="<?php echo base_url()."index.php/penempatan" ?>">
             <i class="fa fa-edit"></i> <span>PENEMPATAN RUANG</span>
             </span>
           </a>
@@ -150,9 +152,19 @@
          <li class="treeview">
           <a href="<?php echo base_url()."index.php/pemeliharaan" ?>">
             <i class="fa fa-edit"></i> <span>PERBAIKAN</span>
+            
+           <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
+          <ul class="treeview-menu">
+          <li><a href="<?php echo base_url()."index.php/pemeliharaan" ?>"><i class="fa fa-circle-o"></i>DATA PERBAIKAN</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i>INSTALASI</a></li>
+          </ul>
         </li>
+          </a>
+        </li>
+
          <li class="treeview">
           <a href="#">
             <i class="fa fa-file"></i> <span>MASTER DATA</span>

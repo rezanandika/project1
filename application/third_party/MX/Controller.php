@@ -54,6 +54,7 @@ class MX_Controller
 		
 		/* autoload module items */
 		$this->load->_autoloader($this->autoload);
+		$this->load->module('template');
 	}
 	
 	public function __get($class) 

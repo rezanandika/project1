@@ -1,10 +1,10 @@
-  
+	
 <?php
-class pemeliharaan_model extends MY_Model{
+class Detail_model extends MY_Model{
 /*   function selectAll()
    {
-    $this->db->order_by("id_barang","desc"); 
-    return $this->db->get('barang')->result();
+		$this->db->order_by("id_barang","desc"); 
+		return $this->db->get('barang')->result();
    }
    public function ambil_data() {
         $query = $this->db->query("select * from barang");
@@ -22,12 +22,25 @@ class pemeliharaan_model extends MY_Model{
         }
         return false;
    }*/
-    protected $_table     = 'pemeliharaan';
-    protected $_primary_key = 'id_pemeliharaan';
+    protected $_table     = 'detail_barang';
+    protected $_primary_key = 'id_detail';
 
     function hapus_data($where, $table){
       $this->db->where($where);
+
       $this->db->delete($table);
     }
+
+    function edit_data($where, $table){
+      return $this->db->get_where($table, $where);
+    }
+
+    function update_data($where, $data, $table)
+    {
+      $this->db->where($where);
+
+      $this->db->update($table, $data);
+    }
+
 }
 ?>

@@ -21,7 +21,7 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-    <form role="form" action="<?php echo base_url().'index.php/lokasi/'.$action; ?>" method="POST" enctype="multipart/form-data">
+    <form role="form" action="<?php echo base_url().'index.php/lokasi/insert' ?>" method="POST" enctype="multipart/form-data">
       <div class="box-body">
                 <div class="form-group">
                   <label for="idlokasi">Kode Lokasi</label>

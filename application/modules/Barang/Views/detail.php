@@ -8,7 +8,7 @@
           <div class="box">
             <div class="box-header">
               <h3 class="box-title"><?= $tittle ?></h3>
-              <a href="<?php echo base_url(). 'index.php/barang/tambah'; ?>" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Tambah Barang</a>
+              <!-- <a href="<?php echo base_url(). 'index.php/barang/tambah'; ?>" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Tambah Barang</a> -->
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -19,30 +19,36 @@
                   <th>Nama Barang</th>
                   <th>Spesifikasi</th>
                   <th>Kategori</th>
-                  <th>Jumlah</th>
-                  <th>Satuan</th>
+                  <th>Software/Hardware</th>
+                  <th>IP</th>
                   <th>Jenis Inventaris</th>
-                  <th>Detail</th>
+                  <th>Penempatan</th>
+                  <!-- <th>Detail</th> -->
                   <th>Aksi</th>
                 </tr>
                 </thead>
               <tbody>
 
-                 <?php foreach($barang as $d){ ?>
+              
+             <?php foreach ($barang as $d) { ?>
+                  
+            
                     <tr align="left">
-                      <td><?php echo $d['id_barang'] ?></td>
-                      <td><?php echo $d['nama_barang'] ?></td>
+                      <td><?php echo $d['id_detail']; ?></td>
+                      <td><?php echo $d['nama'] ?></td>
                       <td><?php echo $d['spesifikasi'] ?></td>
                       <td><?php echo $d['id_kategori'] ?></td>
-                      <td><?php echo $d['jumlah'] ?></td>
-                      <td><?php echo $d['satuan'] ?></td>
+                      <td><?php echo $d['perangkat'] ?></td>
+                      <td><?php echo $d['IP'] ?></td>
                       <td><?php echo $d['id_inventaris'] ?></td>
-                      <td><a href="<?php echo base_url()."index.php/barang/detail/?id=".$d['id_barang']; ?>">Lihat</a></td>
-                      <td><a href="#" title="Edit"><i class="fa fa-pencil text-primary"></i></a> 
-                      <a href="<?php echo base_url(). 'index.php/barang/delete/' .$d['id_barang'] ?>" title="Hapus"><i class="fa fa-trash text-danger"></i></a></td>
+                      <td><?php echo $d['id_penempatan'] ?></td>
+                      <!-- <td><a href="#">Lihat</a></td> -->
+                      <td><a href="<?php echo base_url(). 'index.php/barang/edit_detail/' .$d['id_detail'] ?>" title="Edit"><i class="fa fa-pencil text-primary"></i></a> 
+                        <a href="<?php echo base_url(). 'index.php/barang/delete_detail/' .$d['id_detail'] ?>" title="Hapus"><i class="fa fa-trash text-danger"></i></a></td>
                     </tr>
-                 <?php } ?>
-             
+            
+                 <?php  } ?>  
+                           
                 </tbody>
                 
               </table>

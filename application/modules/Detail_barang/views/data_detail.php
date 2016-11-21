@@ -15,31 +15,40 @@
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th>Kode Detail</th>
+                  <th>Kode Barang</th>
                   <th>Nama Barang</th>
-                  <th>Spesifikasi</th>
-                  <th>Perangkat</th>
+                  <th>Kategori</th>
+                  <th>Satuan</th>
+                  <th>Jenis Inventaris</th>
+                  <th>Software/Hardware</th>
                   <th>IP</th>
                   <th>Penempatan</th>
-                  <th>Inventaris</th>
+                  <!-- <th>Detail</th> -->
                   <th>Aksi</th>
                 </tr>
                 </thead>
               <tbody>
 
-                 <?php foreach($detail as $d){ ?>
+              
+             <?php foreach ($detail as $d) { ?>
+                  
+            
                     <tr align="left">
                       <td><?php echo $d['id_detail']; ?></td>
-                      <td><?php echo $d['nama'] ?></td>
-                      <td><?php echo $d['spesifikasi'] ?></td>
-                      <td><?php echo $d['perangkat'] ?></td>
-                      <td><?php echo $d['IP'] ?></td>
-                      <td><?php echo $d['id_penempatan'] ?></td>
+                      <td><?php echo $d['nama_barang'] ?></td>
+                      <td><?php echo $d['id_kategori'] ?></td>
+                      <td><?php echo $d['satuan'] ?></td>
                       <td><?php echo $d['id_inventaris'] ?></td>
-                      <td><a href="#" title="Edit"><i class="fa fa-pencil text-primary"></i></a> <a href="#" title="Hapus"><i class="fa fa-trash text-danger"></i></a></td>
+                      <td></td>
+                      <td></td>
+                      <td><?php echo $d['id_penempatan'] ?></td>
+                      <!-- <td><a href="#">Lihat</a></td> -->
+                      <td><a href="<?php echo base_url(). 'index.php/barang/edit_detail'; ?>" title="Edit"><i class="fa fa-pencil text-primary"></i></a> 
+                        <a href="<?php echo base_url(). 'index.php/barang/delete_detail/' .$d['id_detail'] ?>" title="Hapus"><i class="fa fa-trash text-danger"></i></a></td>
                     </tr>
-               <?php } ?>
-             
+            
+                 <?php  } ?>  
+                           
                 </tbody>
                 
               </table>
@@ -57,7 +66,7 @@
     <script>
       $(function () {
         $("#example1").DataTable({
-          "pageLength": 5,
+          "pageLength": 25,
         });
         
       });

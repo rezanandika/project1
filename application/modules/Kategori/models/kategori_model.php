@@ -23,5 +23,12 @@ class kategori_model extends MY_Model{
    }*/
   protected $_table     = 'kategori';
   protected $_primary_key = 'id_kategori';
+
+   function hapus_data($where, $table){
+      $this->db->where($where);
+      
+      $this->db->delete($table);
+    }
+
 }
 ?>

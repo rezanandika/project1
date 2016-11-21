@@ -7,6 +7,7 @@ class Lokasi extends MY_Controller {
 	function __construct() {
     parent::__construct();
     $this->load->model('lokasi_model','lokasi');
+    $this->redirect_url = base_url(). "index.php/lokasi";
  
   }
  
@@ -26,6 +27,15 @@ class Lokasi extends MY_Controller {
     $data['state'] = 'insert';
 
     $this->template->views($data);
+  }
+
+  function delete($id_lokasi){
+  $where = array('id_lokasi' => $id_lokasi);
+
+  $this->load->model('lokasi_model','lokasi');
+  $this->lokasi->hapus_data($where,'lokasi');
+
+  redirect($this->redirect_url);
   }
 
   function insert(){
