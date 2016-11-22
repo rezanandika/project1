@@ -33,12 +33,12 @@
                       <td><?php echo $d['id_barang'] ?></td>
                       <td><?php echo $d['nama_barang'] ?></td>
                       <td><?php echo $d['spesifikasi'] ?></td>
-                      <td><?php echo $d['id_kategori'] ?></td>
+                      <td><?php echo $d['nama_kategori'] ?></td>
                       <td><?php echo $d['jumlah'] ?></td>
                       <td><?php echo $d['satuan'] ?></td>
-                      <td><?php echo $d['id_inventaris'] ?></td>
+                      <td><?php echo $d['nama_inventaris'] ?></td>
                       <td><a href="<?php echo base_url()."index.php/barang/detail/?id=".$d['id_barang']; ?>">Lihat</a></td>
-                      <td><a href="#" title="Edit"><i class="fa fa-pencil text-primary"></i></a> 
+                      <td><a href="<?php echo base_url(). 'index.php/barang/edit/?id=' .$d['id_barang'] ?>" title="Edit"><i class="fa fa-pencil text-primary"></i></a> 
                       <a href="<?php echo base_url(). 'index.php/barang/delete/' .$d['id_barang'] ?>" title="Hapus"><i class="fa fa-trash text-danger"></i></a></td>
                     </tr>
                  <?php } ?>
