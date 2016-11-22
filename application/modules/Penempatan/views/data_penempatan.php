@@ -3,11 +3,11 @@
  
 <section class="content">
   <label>Lokasi Ruang</label>
-                  <select class="form-control" name="lokasi">
+                  <select class="form-control" id="lokasi"  name="lokasi">
                     <option>Pilih Lokasi</option>
                      <?php foreach($lokasi as $d){ ?>
-                    <tr align="left">
-                    <option><?php echo $d->nama ?></option>
+                  
+                    <option value="<?= $d['id_lokasi']; ?>"><?php echo $d['nama_lokasi'] ?></option>
                     <?php } ?>
                   </select>
                 </br>
@@ -27,24 +27,24 @@
                 <thead>
                 <tr>
                   <th>Kode Penempatan</th>
-                  <th>Tanggal Penempatan</th>
-                  <th>Kode lokasi</th>
+                  <th>Barang</th>
+                  <th>lokasi</th>
                   <th>Kode Detail</th>
-                  <th>Aksi</th>
+                  <!-- <th>Aksi</th> -->
                 </tr>
                 </thead>
-              <tbody>
+              <tbody id="pemroses">
 
-                 <?php foreach($penempatan as $p){ ?>
+               <!--   <?php foreach($barang as $d){ ?>
                     <tr align="left">
-                      <td><?php echo $p['id_penempatan']; ?></td>
-                      <td><?php echo $p['tgl_penempatan']; ?></td>
-                      <td><?php echo $p['id_lokasi']; ?></td>
-                      <td><?php echo $p['id_detail']; ?></td>
+                      <td><?php echo $d['id_penempatan']; ?></td>
+                      
+                     <td><?php echo $d['nama_lokasi']; ?></td> 
+                      <td><?php echo $d['id_detail']; ?></td>
                       <td><a href="#" title="Edit"><i class="fa fa-pencil text-primary"></i></a> <a href="#" title="Hapus"><i class="fa fa-trash text-danger"></i></a></td>
                     </tr>
                <?php } ?>
-             
+              -->
                 </tbody>
                 
               </table>
@@ -62,8 +62,14 @@
 <script>
       $(function () {
         $('#example2').DataTable({
-          "pageLength": 15,
-        });
-        
+          // "pageLength": 15,
+        })
+        $('#lokasi').on('change', function(){
+          $.get(
+              "<?php echo base_url().'index.php/penempatan/ambilData'; ?>",
+              {id: $(this).val()},function(data){
+                $("#pemroses").html(data);
+              });
+        })
       });
 </script>

@@ -62,7 +62,7 @@ if($state == "edit"){
                                   if($id_kategori == $d['id_kategori'])
                                     $sel="selected='selected'";} ?>
                          
-                          <option value="<?= $d['id_kategori'] ?>" <?php echo $sel ?>><?php echo $d['nama'] ?></option>
+                          <option value="<?= $d['id_kategori'] ?>" <?php echo $sel ?>><?php echo $d['nama_kategori'] ?></option>
 
 
                           <?php } ?>
