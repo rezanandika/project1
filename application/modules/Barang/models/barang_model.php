@@ -1,6 +1,6 @@
 	
 <?php
-class barang_model extends MY_Model{
+class Barang_model extends MY_Model{
 /*   function selectAll()
    {
 		$this->db->order_by("id_barang","desc"); 
@@ -23,7 +23,7 @@ class barang_model extends MY_Model{
         return false;
    }*/
     protected $_table     = 'barang';
-    protected $_primary_key = 'id_barang';
+    protected $primary_key = 'id_barang';
 
     function hapus_data($where, $table){
       $this->db->where($where);

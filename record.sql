@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 18, 2016 at 12:36 AM
+-- Generation Time: Nov 22, 2016 at 04:05 AM
 -- Server version: 10.1.10-MariaDB
 -- PHP Version: 7.0.4
 
@@ -37,12 +37,35 @@ CREATE TABLE `admin` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `antivirus`
+--
+
+CREATE TABLE `antivirus` (
+  `id_antivirus` varchar(25) NOT NULL,
+  `nama_antivirus` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `antivirus`
+--
+
+INSERT INTO `antivirus` (`id_antivirus`, `nama_antivirus`) VALUES
+('AA01', 'AVIRA'),
+('AA02', 'SMADAV'),
+('AA03', 'ESET NOD32'),
+('AA04', 'AVG'),
+('AA05', 'MCAFEE');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `barang`
 --
 
 CREATE TABLE `barang` (
   `id_barang` varchar(25) NOT NULL,
   `nama_barang` varchar(50) NOT NULL,
+  `spesifikasi` text NOT NULL,
   `id_kategori` varchar(25) NOT NULL,
   `jumlah` int(11) NOT NULL,
   `satuan` varchar(25) NOT NULL,
@@ -53,8 +76,18 @@ CREATE TABLE `barang` (
 -- Dumping data for table `barang`
 --
 
-INSERT INTO `barang` (`id_barang`, `nama_barang`, `id_kategori`, `jumlah`, `satuan`, `id_inventaris`) VALUES
-('B0001', 'TOSHIBA X445-45D', 'LAPTOP', 10, 'UNIT', 'BARANG MODAL');
+INSERT INTO `barang` (`id_barang`, `nama_barang`, `spesifikasi`, `id_kategori`, `jumlah`, `satuan`, `id_inventaris`) VALUES
+('', '', '', 'Pilih Kategori', 0, '', 'I01'),
+('B0001', 'TOSHIBA X445-45D', '- Intel Core i7\n- RAM 8GB DDR3\n- Layar 14"\n- Nvidia G840M', 'K002', 10, 'UNIT', 'I01'),
+('B0002', 'PC Asus S756-DD', '- Monitor LG 19"\r\n- Core i3 Haswell\r\n- Vga Intel 3300HD\r\n- Ram 4GB DDR3\r\n- Keyboard Logitech\r\n- Mouse Logitech', 'K002', 7, 'UNIT', 'I02'),
+('B0003', 'PRINTER EPSON L110-X', '- Printer Warna Dot Matrix', 'K003', 6, 'UNIT', 'I01'),
+('B0004', 'PRINTER EPSON L315-X', '- Printer Laser Jet', 'K003', 5, 'UNIT', 'I01'),
+('B0005', 'PRINTER EPSON L650-X', '- Printer Warna Dot Matrix', 'K003', 5, 'UNIT', 'I01'),
+('B0006', 'PRINTER EPSON L300-X', '- Printer Warna Dot Matrix', 'K003', 3, 'UNIT', 'I01'),
+('B0007', 'PRINTER EPSON L81-X', '- Printer Warna Dot Matrix', 'K003', 10, 'UNIT', 'I01'),
+('B010', 'ED', 'EDE', 'K001', 5, 'YES', ''),
+('B22', 'CC', 'CC', 'K001', 0, 'X', ''),
+('CI001', 'HULK', 'HUL', 'K001', 6, 'oke', '');
 
 -- --------------------------------------------------------
 
@@ -64,11 +97,32 @@ INSERT INTO `barang` (`id_barang`, `nama_barang`, `id_kategori`, `jumlah`, `satu
 
 CREATE TABLE `detail_barang` (
   `id_detail` varchar(25) NOT NULL,
-  `nama` varchar(50) NOT NULL,
-  `spesifikasi` text NOT NULL,
+  `id_barang` varchar(25) NOT NULL,
+  `id_kategori` varchar(25) NOT NULL,
+  `perangkat` text NOT NULL,
+  `IP` varchar(20) NOT NULL,
   `id_pemeliharaan` text NOT NULL,
-  `id_penempatan` varchar(50) NOT NULL
+  `id_penempatan` varchar(50) NOT NULL,
+  `id_windows` varchar(225) NOT NULL,
+  `id_antivirus` varchar(225) NOT NULL,
+  `id_office` varchar(225) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `detail_barang`
+--
+
+INSERT INTO `detail_barang` (`id_detail`, `id_barang`, `id_kategori`, `perangkat`, `IP`, `id_pemeliharaan`, `id_penempatan`, `id_windows`, `id_antivirus`, `id_office`) VALUES
+('B0001.1', 'B0001', 'LAPTOP', 'Antivirus : AVIRA, </br>WIN XP 64BIT, MICROSOFT OFFICE 2003, .', '127.0.0.2', '', '9120', 'W08', 'AA03', 'O02'),
+('B0001.2', 'B0001', 'LAPTOP', '', '127.0.0.1', '', '9110', 'W04', 'AA02', 'O04'),
+('B0001.3', 'B0001', 'LAPTOP', '', '', '', '', '', '', ''),
+('B0002.1', 'B0002', '', '', '', '', '', '', '', ''),
+('B0002.2', 'B0002', '', '', '', '', '', '', '', ''),
+('B0002.3', 'B0002', '', '', '', '', '', '', '', ''),
+('B0002.4', 'B0002', '', '', '', '', '', '', '', ''),
+('B0002.5', 'B0002', '', '', '', '', '', '', '', ''),
+('B0002.6', 'B0002', '', '', '', '', '', '', '', ''),
+('B0002.7', 'B0002', '', '', '', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -123,19 +177,38 @@ INSERT INTO `group` (`id`, `name`, `create_date`, `create_by`, `update_date`, `u
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `inventaris`
+--
+
+CREATE TABLE `inventaris` (
+  `id_inventaris` varchar(10) NOT NULL,
+  `nama_inventaris` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `inventaris`
+--
+
+INSERT INTO `inventaris` (`id_inventaris`, `nama_inventaris`) VALUES
+('I01', 'BARANG MODAL'),
+('I02', 'PEMELIHARAAN');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `kategori`
 --
 
 CREATE TABLE `kategori` (
   `id_kategori` varchar(25) NOT NULL,
-  `nama` varchar(225) NOT NULL
+  `nama_kategori` varchar(225) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `kategori`
 --
 
-INSERT INTO `kategori` (`id_kategori`, `nama`) VALUES
+INSERT INTO `kategori` (`id_kategori`, `nama_kategori`) VALUES
 ('K001', 'PC'),
 ('K002', 'LAPTOP'),
 ('K003', 'PRINTER'),
@@ -156,42 +229,19 @@ INSERT INTO `kategori` (`id_kategori`, `nama`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `layanan`
---
-
-CREATE TABLE `layanan` (
-  `id` int(11) NOT NULL,
-  `nama_layanan` varchar(30) NOT NULL,
-  `unit` varchar(10) NOT NULL,
-  `harga_normal` int(10) NOT NULL,
-  `harga_express` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `layanan`
---
-
-INSERT INTO `layanan` (`id`, `nama_layanan`, `unit`, `harga_normal`, `harga_express`) VALUES
-(1, 'Cuci Setrika', 'KG', 4000, 6000),
-(2, 'Cuci', 'KG', 3000, 4500),
-(3, 'Setrika', 'KG', 3000, 4500);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `lokasi`
 --
 
 CREATE TABLE `lokasi` (
   `id_lokasi` varchar(5) NOT NULL,
-  `nama` varchar(225) NOT NULL
+  `nama_lokasi` varchar(225) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `lokasi`
 --
 
-INSERT INTO `lokasi` (`id_lokasi`, `nama`) VALUES
+INSERT INTO `lokasi` (`id_lokasi`, `nama_lokasi`) VALUES
 ('9101', 'KLINIK PENYAKIT DALAM'),
 ('9102', 'KLINIK DIABETES MILITUS'),
 ('9103', 'KLINIK HIPERT & GINJAL                            '),
@@ -515,16 +565,23 @@ INSERT INTO `menugroup` (`group_id`, `menu_id`, `view`, `add`, `edit`, `delete`)
 -- --------------------------------------------------------
 
 --
--- Table structure for table `outlet`
+-- Table structure for table `office`
 --
 
-CREATE TABLE `outlet` (
-  `id` int(11) NOT NULL,
-  `nama_outlet` text NOT NULL,
-  `slogan` varchar(100) NOT NULL,
-  `logo` varchar(55) NOT NULL,
-  `alamat` varchar(70) NOT NULL
+CREATE TABLE `office` (
+  `id_office` varchar(25) NOT NULL,
+  `nama_office` varchar(225) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `office`
+--
+
+INSERT INTO `office` (`id_office`, `nama_office`) VALUES
+('O01', 'LIBRE OFFICE'),
+('O02', 'MICROSOFT OFFICE 2003'),
+('O03', 'MICROSOFT OFFICE 2007'),
+('O04', 'MICROSOFT OFFICE 2013');
 
 -- --------------------------------------------------------
 
@@ -547,7 +604,7 @@ CREATE TABLE `pemeliharaan` (
 --
 
 INSERT INTO `pemeliharaan` (`id_pemeliharaan`, `tgl_mulai`, `tgl_selesai`, `kerusakan`, `penanganan`, `id_detail`, `id_lokasi`) VALUES
-('PP001', '2016-11-17 13:12:00', '2016-11-17 14:15:00', 'tidak mau print', 'penanganan pada catrigde', '', '');
+('PP0001', '2016-11-15 14:00:00', '2016-11-18 15:00:00', 'Mainboard mati', 'diperlukan adanya penggantian sparepart', 'B0001.1', '9101');
 
 -- --------------------------------------------------------
 
@@ -567,7 +624,7 @@ CREATE TABLE `penempatan` (
 --
 
 INSERT INTO `penempatan` (`id_penempatan`, `tgl_penempatan`, `id_lokasi`, `id_detail`) VALUES
-('P0001', '2016-11-12', 'L001', '');
+('P0001', '2016-11-12', 'L001', 'B0001.1');
 
 -- --------------------------------------------------------
 
@@ -701,17 +758,54 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `name`, `username`, `password`, `email`, `group_id`, `userfile`, `create_date`, `create_by`, `update_date`, `update_by`, `last_login`) VALUES
 ('5dab4804c4f05f11d7e2ac6379a55ed9b3d24fda', 'Admin Dev', 'isaadmin', 'a5039e5b86e2b0588c0af55d1c40e74ad616d5d7', 'hanief@isatechindonesia.com', '54345880d047bf8496e0df28c4a3db5359083240', NULL, '2015-04-28 11:06:47', 0, '2015-04-28 16:29:10', '0', '0000-00-00 00:00:00'),
-('c4cab7526d9d124d79b30c818d2fcc37a1f63c73', 'tes123', 'admin', '90b9aa7e25f80cf4f64e990b78a9fc5ebd6cecad', 'tes123@gmail.com', '67544603076af2daf15675402647dcbe85c629ec', NULL, '2015-04-28 12:48:38', 0, '2016-11-17 11:34:52', 'c4cab7526d9d124d79b30c818d2fcc37a1f63c73', '2016-11-17 11:34:52');
+('c4cab7526d9d124d79b30c818d2fcc37a1f63c73', 'tes123', 'admin', '90b9aa7e25f80cf4f64e990b78a9fc5ebd6cecad', 'tes123@gmail.com', '67544603076af2daf15675402647dcbe85c629ec', NULL, '2015-04-28 12:48:38', 0, '2016-11-20 04:34:05', 'c4cab7526d9d124d79b30c818d2fcc37a1f63c73', '2016-11-20 04:34:05');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `windows`
+--
+
+CREATE TABLE `windows` (
+  `id_windows` varchar(25) NOT NULL,
+  `nama_windows` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `windows`
+--
+
+INSERT INTO `windows` (`id_windows`, `nama_windows`) VALUES
+('W01', 'WIN XP 32BIT'),
+('W02', 'WIN XP 64BIT'),
+('W03', 'WIN 7 PRO 32BIT'),
+('W04', 'WIN 7 PRO 64BIT'),
+('W05', 'WIN 7 ULTIMATE 32BIT'),
+('W06', 'WIN 7 ULTIMATE 64BIT'),
+('W07', 'WIN 10 32BIT'),
+('W08', 'WIN 10 64BIT');
 
 --
 -- Indexes for dumped tables
 --
 
 --
+-- Indexes for table `antivirus`
+--
+ALTER TABLE `antivirus`
+  ADD PRIMARY KEY (`id_antivirus`);
+
+--
 -- Indexes for table `barang`
 --
 ALTER TABLE `barang`
   ADD PRIMARY KEY (`id_barang`);
+
+--
+-- Indexes for table `detail_barang`
+--
+ALTER TABLE `detail_barang`
+  ADD PRIMARY KEY (`id_detail`);
 
 --
 -- Indexes for table `file`
@@ -726,10 +820,16 @@ ALTER TABLE `group`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `layanan`
+-- Indexes for table `inventaris`
 --
-ALTER TABLE `layanan`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `inventaris`
+  ADD PRIMARY KEY (`id_inventaris`);
+
+--
+-- Indexes for table `kategori`
+--
+ALTER TABLE `kategori`
+  ADD PRIMARY KEY (`id_kategori`);
 
 --
 -- Indexes for table `menu`
@@ -744,10 +844,22 @@ ALTER TABLE `menugroup`
   ADD PRIMARY KEY (`group_id`,`menu_id`);
 
 --
--- Indexes for table `outlet`
+-- Indexes for table `office`
 --
-ALTER TABLE `outlet`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `office`
+  ADD PRIMARY KEY (`id_office`);
+
+--
+-- Indexes for table `pemeliharaan`
+--
+ALTER TABLE `pemeliharaan`
+  ADD PRIMARY KEY (`id_pemeliharaan`);
+
+--
+-- Indexes for table `penempatan`
+--
+ALTER TABLE `penempatan`
+  ADD PRIMARY KEY (`id_penempatan`);
 
 --
 -- Indexes for table `profile`
@@ -783,16 +895,6 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for dumped tables
 --
 
---
--- AUTO_INCREMENT for table `layanan`
---
-ALTER TABLE `layanan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT for table `outlet`
---
-ALTER TABLE `outlet`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `setting`
 --

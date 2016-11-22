@@ -23,7 +23,7 @@ class Detail_model extends MY_Model{
         return false;
    }*/
     protected $_table     = 'detail_barang';
-    protected $_primary_key = 'id_detail';
+    protected $primary_key = 'id_detail';
 
     function hapus_data($where, $table){
       $this->db->where($where);

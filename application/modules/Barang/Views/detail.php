@@ -35,15 +35,15 @@
             
                     <tr align="left">
                       <td><?php echo $d['id_detail']; ?></td>
-                      <td><?php echo $d['nama'] ?></td>
+                      <td><?php echo $d['nama_barang'] ?></td>
                       <td><?php echo $d['spesifikasi'] ?></td>
-                      <td><?php echo $d['id_kategori'] ?></td>
-                      <td><?php echo $d['perangkat'] ?></td>
+                      <td><?php echo $d['nama_kategori'] ?></td>
+                      <td><?php echo $d['nama_antivirus'].','.$d['nama_windows'].','.$d['nama_office'] ?></td>
                       <td><?php echo $d['IP'] ?></td>
-                      <td><?php echo $d['id_inventaris'] ?></td>
-                      <td><?php echo $d['id_penempatan'] ?></td>
+                      <td><?php echo $d['nama_inventaris'] ?></td>
+                      <td><?php echo $d['nama_lokasi'] ?></td>
                       <!-- <td><a href="#">Lihat</a></td> -->
-                      <td><a href="<?php echo base_url(). 'index.php/barang/edit_detail/' .$d['id_detail'] ?>" title="Edit"><i class="fa fa-pencil text-primary"></i></a> 
+                      <td><a href="<?php echo base_url(). 'index.php/barang/edit_detail/?id=' .$d['id_detail'] ?>" title="Edit"><i class="fa fa-pencil text-primary"></i></a> 
                         <a href="<?php echo base_url(). 'index.php/barang/delete_detail/' .$d['id_detail'] ?>" title="Hapus"><i class="fa fa-trash text-danger"></i></a></td>
                     </tr>
             
