@@ -2,7 +2,7 @@
 if($state == "edit"){
   $id_detail = $d['id_detail'];
   $id_barang = $d['id_barang'];
-  $nama = $d['nama_barang'];
+  $nama_barang = $d['nama_barang'];
   $spesifikasi = $d['spesifikasi'];
   $id_windows = $d['id_windows'];
   $id_antivirus = $d['id_antivirus'];
@@ -38,8 +38,8 @@ if($state == "edit"){
                 <form method="post" class="form-horizontal" action="<?php echo base_url()."index.php/barang/detail_update" ?>">
                   <div class="box-body">
                     <div class="form-group">
-                      <label for="iddetal" class="col-sm-2 control-label">Kode Detail Barang</label>
-                      <div class="col-sm-5">
+                      <label for="iddetail" class="col-sm-2 control-label">Kode Detail Barang</label>
+                      <div class="col-sm-5 input-group">
 
                         <input disabled type="text" class="form-control" id="iddetail" value="<?= $id_detail; ?>" name="iddetail">
                         <input type="hidden" class="form-control" id="iddetail" value="<?= $id_detail; ?>" name="iddetail">
@@ -48,9 +48,9 @@ if($state == "edit"){
                     </div>
                     <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">Nama Barang</label>
-                      <div class="col-sm-5">
+                      <div class="col-sm-5 input-group">
                     
-                        <input type="text" class="form-control" id="nama" value="<?php echo $nama ?>" name="namadetail" disabled>
+                        <input type="text" class="form-control" id="nama" value="<?php echo $nama_barang ?>" name="namadetail" disabled> </input>
 
                          <input type="hidden" class="form-control" id="id_barang" value="<?php echo $d['id_barang'] ?>" name="id_barang" >
                       
@@ -58,7 +58,7 @@ if($state == "edit"){
                     </div>
                     <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">Spesifikasi</label>
-                      <div class="col-sm-5">
+                      <div class="col-sm-5 input-group">
                     
                          <textarea class="form-control" id="spesifikasi" name="spesifikasi" disabled><?php echo $d['spesifikasi'] ?></textarea>
                        
@@ -88,7 +88,7 @@ if($state == "edit"){
                                       <label for="inputEmail3" class="col-sm-2 control-label" >Antivirus</label>
 
                                       <div class=" col-sm-8">
-                                        <select class="form-control" name="id_antivirus">
+                                        <select class="form-control select2" name="id_antivirus">
                                         <option class="disabled">Pilih Antivirus</option>
                                          <?php foreach($antivirus as $av){
                                             $sel=""; if(isset($id_antivirus)){
@@ -100,11 +100,12 @@ if($state == "edit"){
                                        </select>
                                       </div>
                                     </div>
+
                                     <div class="form-group">
                                       <label for="inputPassword3" class="col-sm-2 control-label">Windows</label>
 
                                       <div class="col-sm-8">
-                                        <select class="form-control" name="id_windows">
+                                        <select class="form-control select2" name="id_windows">
                                         <option class="disabled">Pilih Windows</option>
                                            <?php foreach($windows as $w){
                                               $sel="";  if(isset($id_windows)){
@@ -118,11 +119,12 @@ if($state == "edit"){
                                          </select>
                                       </div>
                                     </div>
+
                                     <div class="form-group">
                                       <label for="inputPassword3" class="col-sm-2 control-label">Office</label>
 
                                       <div class="col-sm-8">
-                                        <select class="form-control" name="id_office">
+                                        <select class="form-control select2" name="id_office">
                                         <option class="disabled">Pilih Office</option>
                                            <?php foreach($office as $o){ 
                                             $sel=""; if(isset($id_office)){
@@ -153,22 +155,37 @@ if($state == "edit"){
 
                   </div>
 
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                       <label for="ip" class="col-sm-2 control-label">IP</label>
                       <div class="col-sm-5">
                          <input type="text" class="form-control" id="ip" name="ip" value="<?php if(isset($ip)) echo $ip,'' ?>">
                       </div>
-                    </div>
+                    </div> -->
+                 <div class="form-group">
+                <label for="ip" class="col-sm-2 control-label">IP</label>
+
+                <div class="input-group col-md-5">
+                  <div class="input-group-addon">
+                    <i class="fa fa-laptop"></i>
+                  </div>
+                  <input type="text" class="form-control" data-inputmask="'alias': 'ip'" id="ip" name="ip" value="<?php if(isset($ip)) echo $ip,'' ?>" data-mask>
+                </div>
+                <!-- /.input group -->
+              </div>
+              <!-- /.form group -->
+
+
+
                      <div class="form-group">
                       <label for="idperbaikan" class="col-sm-2 control-label">Kode Perbaikan</label>
-                      <div class="col-sm-5">
+                      <div class="col-sm-5 input-group">
                          <input type="text" class="form-control" id="idperbaikan" name="idperbaikan"> 
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="idpenempatan" class="col-sm-2 control-label">Kode Penempatan</label>
-                      <div class="col-sm-5">
-                                      <select class="form-control" name="id_penempatan">
+                      <div class="col-sm-5 input-group">
+                                      <select class="form-control select2" name="id_penempatan">
                                         <option class="disabled">Pilih Lokasi</option>
                                            <?php foreach($lokasi as $l){
                                             $sel=""; if(isset($id_penempatan)){
@@ -194,7 +211,7 @@ if($state == "edit"){
                       </div>
                     </div> -->
                     <div class="form-group">
-                      <div class="col-sm-offset-2 col-sm-10">
+                      <div class="col-sm-offset-2 col-sm-10 input-group">
                         <button  class="btn btn-default">Cancel</button>
                         <button type="submit" class="btn btn-info">Simpan</button>
                  

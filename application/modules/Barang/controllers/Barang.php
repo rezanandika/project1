@@ -47,7 +47,7 @@ class Barang extends MY_Controller {
 
   public function detail(){
     $id = $this->input->get("id");
-    $data['tittle'] ='Data Barang';
+    $data['tittle'] ='Data Detail Barang';
     $data['content'] = "barang/detail";
     $this->db->join("barang","barang.id_barang = detail_barang.id_barang");
     $this->db->join('inventaris','inventaris.id_inventaris = barang.id_inventaris');
@@ -55,6 +55,7 @@ class Barang extends MY_Controller {
     $this->db->join('antivirus','antivirus.id_antivirus = detail_barang.id_antivirus','left');
     $this->db->join('windows','windows.id_windows = detail_barang.id_windows','left');
     $this->db->join('office','office.id_office = detail_barang.id_office','left');
+    $this->db->join('lain','lain.id_lain = detail_barang.id_lain','left');
     $this->db->join('lokasi','lokasi.id_lokasi = detail_barang.id_penempatan','left');
 
 
@@ -73,7 +74,7 @@ class Barang extends MY_Controller {
     $datas = $this->input->post();
 
     $data['id_barang'] = $datas['idbarang'];
-    $data['nama_barang'] = $datas['nama'];
+    $data['nama_barang'] = $datas['namabarang'];
     $data['spesifikasi'] = $datas['spesifikasi'];
     $data['id_kategori'] = $datas['kategori'];
     $data['satuan'] = $datas['satuan'];
@@ -91,10 +92,10 @@ class Barang extends MY_Controller {
 
     $query['id_detail'] = $datas['idbarang'].".".$n;
     $query['id_barang'] = $datas['idbarang'];
-    // $query['nama'] = $datas['nama'];
-    // $query['spesifikasi'] = $datas['spesifikasi'];
-    // $query['id_kategori'] = $datas['kategori'];
-    // $query['id_inventaris'] = $datas['inventaris'];
+    $query['nama_detail'] = $datas['namabarang'];
+    $query['spesifikasi'] = $datas['spesifikasi'];
+    $query['id_kategori'] = $datas['kategori'];
+    $query['id_inventaris'] = $datas['inventaris'];
 
         $this->detail->insert($query);
 
@@ -113,6 +114,8 @@ class Barang extends MY_Controller {
     $data['d'] = $this->barang->get_by(array("id_barang" => $id));
     $data['kategori'] = $this->ktg->get_all();  
     $data['inventaris'] = $this->db->get('inventaris')->result();
+
+    $data['title'] = "Edit Data Barang";
     $data['state'] = "edit";
 
     $this->template->views($data);
@@ -150,6 +153,7 @@ class Barang extends MY_Controller {
     $data['antivirus'] = $this->db->get('antivirus')->result();
     $data['office'] = $this->db->get('office')->result();
     $data['windows'] = $this->db->get('windows')->result();
+    $data['lain'] = $this->db->get('lain')->result();
 
     $data['state'] = "edit";
     $data['content']  = 'barang/form_edit';
@@ -232,6 +236,7 @@ class Barang extends MY_Controller {
             "id_antivirus" => $data['id_antivirus'],
             "id_windows" => $data['id_windows'],
             "id_office" => $data['id_office'],
+            "id_lain" => $data['id_lain'],
             "IP" => $data['ip'],
             "id_penempatan" => $data['id_penempatan']
         );

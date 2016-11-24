@@ -22,12 +22,6 @@ class lokasi_model extends MY_Model{
         return false;
    }*/
   protected $_table     = 'lokasi';
-  protected $primary_key = 'id_lokasi';
-
-   function hapus_data($where, $table){
-      $this->db->where($where);
-      
-      $this->db->delete($table);
-    }
+  protected $_primary_key = 'id_lokasi';
 }
 ?>

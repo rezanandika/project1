@@ -6,8 +6,13 @@
     <!--<link rel="icon" href="<?php echo base_url(); ?>/assets/img/favicon.ico" type="image/x-icon">-->
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- Bootstrap 3.3.4 -->
-    <link href="<?php echo base_url('template/admin_lte'); ?>/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />    
-  
+    <link href="<?php echo base_url('template/admin_lte'); ?>/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />   
+    <!-- Select2 -->
+    <link rel="stylesheet" href="<?php echo base_url('template/admin_lte'); ?>/plugins/select2/select2.min.css">
+      <!-- Bootstrap time Picker -->
+<!--   <link rel="stylesheet" href="<?php echo base_url('template/admin_lte'); ?>/plugins/timepicker/bootstrap-timepicker.min.css"> 
+   bootstrap datepicker
+  <link rel="stylesheet" href="<?php echo base_url('template/admin_lte'); ?>/plugins/datepicker/datepicker3.css">  --> 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="<?php echo base_url('template/admin_lte'); ?>/dist/css/font-awesome/css/font-awesome.min.css">
   <!-- Ionicons -->
@@ -112,23 +117,23 @@
  <ul class="sidebar-menu">
         <li class="header">MAIN NAVIGATION</li>
         <li class="active treeview">
-          <a href="<?php echo base_url()?> ">
+          <a href="<?php echo base_url(). "index.php/beranda"; ?> ">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
             <span class="pull-right-container">
             </span>
           </a>
         </li>
          <li class="treeview">
-          <a href="<?php echo base_url(). "index.php/barang" ?>">
+          <a href="<?php echo base_url(). "index.php/barang"; ?>">
             <i class="fa fa-edit"></i> <span>MENU BARANG</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-          <li><a href="<?php echo base_url()."index.php/barang" ?>"><i class="fa fa-circle-o"></i>DATA BARANG</a></li>
-            <li><a href="<?php echo base_url()."index.php/barangmodal" ?>"><i class="fa fa-circle-o"></i>BARANG MODAL</a></li>
-            <li><a href="pages/forms/advanced.html"><i class="fa fa-circle-o"></i>PEMELIHARAAN</a></li>
+          <li><a href="<?php echo base_url()."index.php/barang" ?>"><i class="fa fa-circle-o"></i>Data Barang</a></li>
+            <li><a href="<?php echo base_url()."index.php/barangmodal" ?>"><i class="fa fa-circle-o"></i>Barang Modal</a></li>
+            <li><a href="pages/forms/advanced.html"><i class="fa fa-circle-o"></i>Barang Pemeliharaan</a></li>
           </ul>
         </li>
          <li class="treeview">
@@ -145,21 +150,21 @@
         </li>
          <li class="treeview">
           <a href="<?php echo base_url()."index.php/penempatan" ?>">
-            <i class="fa fa-edit"></i> <span>PENEMPATAN RUANG</span>
+            <i class="fa fa-edit"></i> <span>MENU PENEMPATAN RUANG</span>
             </span>
           </a>
         </li>
          <li class="treeview">
           <a href="<?php echo base_url()."index.php/pemeliharaan" ?>">
-            <i class="fa fa-edit"></i> <span>PERBAIKAN</span>
+            <i class="fa fa-edit"></i> <span>MENU PEMELIHARAAN</span>
             
            <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-          <li><a href="<?php echo base_url()."index.php/pemeliharaan" ?>"><i class="fa fa-circle-o"></i>DATA PERBAIKAN</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>INSTALASI</a></li>
+          <li><a href="<?php echo base_url()."index.php/pemeliharaan" ?>"><i class="fa fa-circle-o"></i>Data Perbaikan</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i>Instalasi</a></li>
           </ul>
         </li>
           </a>
@@ -173,7 +178,7 @@
         </li>
          <li class="treeview">
           <a href="#">
-            <i class="fa fa-edit"></i> <span>SETTING</span>
+            <i class="fa fa-edit"></i> <span>MENU SETTING</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -220,6 +225,10 @@
     <!-- jQuery 2.2.3 -->
 <!-- Bootstrap 3.3.6 -->
 <script src="<?php echo base_url('template/admin_lte/'); ?>/bootstrap/js/bootstrap.min.js"></script>
+<!-- bootstrap datepicker -->
+<!-- <script src="<?php echo base_url('template/admin_lte/'); ?>/plugins/datepicker/bootstrap-datepicker.js"></script>
+bootstrap time picker
+<script src="<?php echo base_url('template/admin_lte/'); ?>/plugins/timepicker/bootstrap-timepicker.min.js"></script> -->
 <!-- DataTables -->
 
 <!-- SlimScroll -->
@@ -230,7 +239,30 @@
 <script src="<?php echo base_url('template/admin_lte/'); ?>/dist/js/app.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="<?php echo base_url('template/admin_lte/'); ?>/dist/js/demo.js"></script>
+<!-- Select2 -->
+<script src="<?php echo base_url('template/admin_lte/'); ?>/plugins/select2/select2.full.min.js"></script>
 <!-- page script -->
+
+<!-- <script>
+  $(function () {
+//Date picker
+    $('#datepicker').datepicker({
+      autoclose: true
+    });
+
+     //Timepicker
+    $(".timepicker").timepicker({
+      showInputs: false
+    });
+
+  });
+  </script> -->
+  <script>
+  $(function () {
+  //Initialize Select2 Elements
+    $(".select2").select2();
+  });
+  </script>
 
   </body>
 </html>

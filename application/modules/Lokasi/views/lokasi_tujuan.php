@@ -1,8 +1,38 @@
- <!-- DataTables -->
   <link rel="stylesheet" href="<?php echo base_url('template/admin_lte'); ?>/plugins/datatables/dataTables.bootstrap.css">
- 
-<section class="content">
-      <div class="row">
+
+<script>
+    function get_detail(){
+      var id_lokasi = $("#lokasi"),val();
+      $.ajax({
+            type: "POST",
+            url: "<?php echo site_url('Lokasi/lokasi_-tujuan'); ?>",
+            data:"id_lokasi="+id_lokasi,
+            success: function(msg) {
+                      $("#div_detail").html(msg);
+            }
+      });
+
+    }
+
+</script>
+
+
+    <!-- Main content -->
+    <section class="content">
+
+    <label>Lokasi Ruang</label>
+                  <select class="form-control" name="lokasi" onchange="get_detail();">
+                    <option>Pilih Lokasi</option>
+                     <?php foreach($lokasi as $d){ ?>
+                    <tr align="left">
+                    <option><?php echo $d['nama_lokasi']; ?></option>
+                    <?php } ?>
+                  </select>
+                </br>
+              </br>
+
+      <!-- Default box -->
+      <div class="row" id="div_detail">
         <div class="col-xs-12">
          
           <div class="box">
@@ -30,7 +60,7 @@
               <tbody>
 
               
-             <?php foreach ($barang as $d) { ?>
+             <?php foreach ($detail as $d) { ?>
                   
             
                     <tr align="left">
@@ -40,8 +70,7 @@
                       <td><?php echo $d['nama_kategori'] ?></td>
                       <td><?php echo '<b>Antivirus</b> : '.$d['nama_antivirus'].
                                      '</br><b>Windows</b> : '.$d['nama_windows'].
-                                     '</br><b>Office</b> : ' .$d['nama_office'].
-                                     '</br><b>Lain</b> : ' .$d['deskripsi'] ?></td>
+                                     '</br><b>Office</b> : ' .$d['nama_office'] ?></td>
                       <td><?php echo $d['IP'] ?></td>
                       <td><?php echo $d['nama_inventaris'] ?></td>
                       <td><?php echo $d['nama_lokasi'] ?></td>
@@ -62,15 +91,13 @@
         </div>
         <!-- /.col -->
       </div>
-      <!-- /.row -->
-    </section>
-    <script src="<?php echo base_url('template/admin_lte/'); ?>/plugins/datatables/jquery.dataTables.min.js"></script>
-    <script src="<?php echo base_url('template/admin_lte/'); ?>/plugins/datatables/dataTables.bootstrap.min.js"></script>
-    <script>
+<script src="<?php echo base_url('template/admin_lte/'); ?>/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="<?php echo base_url('template/admin_lte/'); ?>/plugins/datatables/dataTables.bootstrap.min.js"></script>
+<script>
       $(function () {
         $("#example1").DataTable({
           "pageLength": 25,
         });
         
       });
-    </script>
+</script>

@@ -26,7 +26,7 @@
                  <?php foreach($lokasi as $l){ ?>
                     <tr align="left">
                       <td><?php echo $l['id_lokasi']; ?></td>
-                      <td><?php echo $l['nama']; ?></td>
+                      <td><?php echo $l['nama_lokasi']; ?></td>
                       <td><a href="#" title="Edit"><i class="fa fa-pencil text-primary"></i></a> 
                       <a href="<?php echo base_url(). 'index.php/lokasi/delete/' .$l['id_lokasi'] ?>" title="Hapus"><i class="fa fa-trash text-danger"></i></a></td>
                     </tr>

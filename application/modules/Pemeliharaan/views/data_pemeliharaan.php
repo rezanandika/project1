@@ -46,15 +46,16 @@
                   <td><?php echo $d['id_lokasi'] ?></td>
                   <td><?php echo $d['id_detail'] ?></td>
                   <td><?php echo $d['tgl_mulai'] ?></td>
-                  <td><?php echo $d['waktu_mulai'] ?></td>
+                  <td><?php echo $d['jam_mulai'] ?></td>
                   <td><?php echo $d['tgl_selesai'] ?></td>
-                  <td><?php echo $d['waktu_selesai'] ?></td>
+                  <td><?php echo $d['jam_selesai'] ?></td>
                   <td><?php echo $d['kerusakan'] ?></td>
                   <td><?php echo $d['penanganan'] ?></td>
                   
                  
-                      <td><a href="#" title="Edit"><i class="fa fa-pencil text-primary"></i></a> 
-                      <a href="#" title="Hapus"><i class="fa fa-trash text-danger"></i></a></td>
+                      <td><a href="<?php echo base_url(). 'index.php/pemeliharaan/edit/?id=' .$d['id_pemeliharaan'] ?>" title="Edit"><i class="fa fa-pencil text-primary"></i></a>
+
+                        <a href="<?php echo base_url(). 'index.php/pemeliharaan/delete/' .$d['id_pemeliharaan'] ?>" title="Hapus"><i class="fa fa-trash text-danger"></i></a></td>
                     </tr>
                  <?php } ?>
              

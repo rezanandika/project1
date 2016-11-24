@@ -1,7 +1,7 @@
 <?php 
 if($state == "edit"){
   $id_barang = $d['id_barang'];
-  $nama = $d['nama_barang'];
+  $nama_barang = $d['nama_barang'];
   $spesifikasi = $d['spesifikasi'];
   $id_kategori = $d['id_kategori'];
   $jumlah = $d['jumlah'];
@@ -10,7 +10,7 @@ if($state == "edit"){
   $action =  "update";
 }else{
   $id_barang ="";
-  $nama ="";
+  $nama_barang ="";
   $spesifikasi ="";
   $id_kategori ="";
   $jumlah ="";
@@ -28,7 +28,7 @@ if($state == "edit"){
               <!-- Horizontal Form -->
               <div class="box box-info">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Tambah Barang</h3>
+                  <h3 class="box-title"><?= $title ?></h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
                 <form method="post" class="form-horizontal" action="<?php echo base_url()."index.php/barang/".$action; ?>">
@@ -37,13 +37,12 @@ if($state == "edit"){
                       <label for="idbarang" class="col-sm-2 control-label">Kode Barang</label>
                       <div class="col-sm-5">
                         <input type="text" class="form-control" id="idbarang" placeholder="Kode Barang" name="idbarang" value="<?php if(isset($id_barang)) echo $id_barang,''  ?>" >
-                         <input type="hidden" class="form-control" id="idbarang" placeholder="Kode Barang" name="idbarang" value="<?php if(isset($id_barang)) echo $id_barang,'' ?>">
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">Nama Barang</label>
                       <div class="col-sm-5">
-                        <input type="text" class="form-control" id="nama" placeholder="Nama Barang" name="nama" value="<?php if(isset($nama)) echo $nama,'' ?>">
+                        <input type="text" class="form-control" id="nama" placeholder="Nama Barang" name="namabarang" value="<?php if(isset($nama_barang)) echo $nama_barang,'' ?>">
                       </div>
                     </div>
                     <div class="form-group">
@@ -55,7 +54,7 @@ if($state == "edit"){
                     <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">Kategori</label>
                       <div class="col-sm-5">
-                         <select class="form-control" name="kategori">
+                         <select class="form-control select2" name="kategori">
                          <option>Pilih Kategori</option>
                           <?php  foreach($kategori as $d){ 
                                $sel=""; if(isset($id_kategori)){
@@ -84,7 +83,7 @@ if($state == "edit"){
                     <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">Jenis Inventaris</label>
                       <div class="col-sm-5">
-                         <select class="form-control" name="inventaris">
+                         <select class="form-control select2" name="inventaris">
                            <?php foreach($inventaris as $i){ 
                               $sel=""; if(isset($id_invent)){
                                 if ($id_invent == $i->id_inventaris)
@@ -92,7 +91,8 @@ if($state == "edit"){
                               }
                             ?>
                             
-                            <option value="<?= $i->id_inventaris ?>" <?php echo $sel ?>><?php echo $i->nama_inventaris ?></option>
+                            <option value="<?= $i->id_inventaris ?>" <?php echo $sel ?>>
+                            <?php echo $i->nama_inventaris ?></option>
                             <?php } ?>
                          </select>
                       </div>
