@@ -12,6 +12,9 @@ class Barang extends MY_Controller {
   // $this->load->module('inventaris');
   $this->load->model('Kategori_model', 'ktg');
   $this->load->model('Detail_model','detail');
+  $this->load->model('lain_model','ln');
+  $this->load->model('Baranglain_model','brgln');
+
   // $this->load->model('Inventaris_model', 'invt');
   $this->redirect_url = base_url(). "index.php/barang";
 
@@ -57,10 +60,11 @@ class Barang extends MY_Controller {
     $this->db->join('office','office.id_office = detail_barang.id_office','left');
     $this->db->join('lain','lain.id_lain = detail_barang.id_lain','left');
     $this->db->join('lokasi','lokasi.id_lokasi = detail_barang.id_penempatan','left');
-
-
     //$data['penempatan'] = $this->db->get('penempatan')->result();
     $data['barang'] = $this->detail->get_many_by(array("detail_barang.id_barang" => $id));
+
+    $this->db->join("lain",'lain.id_lain = lain_barang.id_lain');
+    $data['brglain'] = $this->brgln->get_all();
 
 
     $this->template->views($data);
@@ -153,7 +157,10 @@ class Barang extends MY_Controller {
     $data['antivirus'] = $this->db->get('antivirus')->result();
     $data['office'] = $this->db->get('office')->result();
     $data['windows'] = $this->db->get('windows')->result();
-    $data['lain'] = $this->db->get('lain')->result();
+    $data['lain'] = $this->ln->get_all();
+    $data['brglain'] = $this->brgln->get_many_by(array("id_detail" => $id ));
+    // $data['modal'] = $this->load->view("modal",$data);
+
 
     $data['state'] = "edit";
     $data['content']  = 'barang/form_edit';
@@ -235,15 +242,36 @@ class Barang extends MY_Controller {
     $datas = array(
             "id_antivirus" => $data['id_antivirus'],
             "id_windows" => $data['id_windows'],
-            "id_office" => $data['id_office'],
-            "id_lain" => $data['id_lain'],
+            "id_office" => $data['id_office'], 
             "IP" => $data['ip'],
             "id_penempatan" => $data['id_penempatan']
         );
 
 
+    // $delete = array();
+    // if(!empty($data['deletebarang'])){
+    // foreach ($data['deletebarang'] as $deleteid) {
+
+    //   // array_push($delete, array('idlainbarang' => $deleteid));
+    //   }
+    // }
+
+
+    // if(!empty($delete))
+    // $this->brgln->delete_many($delete);
+
+    $lain = array();
+    if(!empty($data['checks'])){
+    foreach ($data['checks'] as $idchecks) {
+      array_push($lain, array('idlainbarang' => generate_id('idbaranglain'), 'id_detail' => $id,'id_lain' => $idchecks));
+      }
+    }
+
     $this->detail->update($id,$datas);
-    
+
+    $this->brgln->delete_by(array('id_detail' => $id)); 
+    if(!empty($lain))
+    $this->brgln->insert_batch($lain);
 
     $this->db->trans_complete();
 

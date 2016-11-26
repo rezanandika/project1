@@ -40,8 +40,16 @@
                       <td><?php echo $d['nama_kategori'] ?></td>
                       <td><?php echo '<b>Antivirus</b> : '.$d['nama_antivirus'].
                                      '</br><b>Windows</b> : '.$d['nama_windows'].
-                                     '</br><b>Office</b> : ' .$d['nama_office'].
-                                     '</br><b>Lain</b> : ' .$d['deskripsi'] ?></td>
+                                     '</br><b>Office</b> : ' .$d['nama_office']
+                                      ?> </br><b>lain</b>: <?php $sel="";
+                                        foreach ($brglain as $val) {
+                                          if ($d['id_detail'] == $val['id_detail']){ echo $val['deskripsi'].','; }
+
+
+                                        } 
+                                       ?>
+                                      
+                                        </td>
                       <td><?php echo $d['IP'] ?></td>
                       <td><?php echo $d['nama_inventaris'] ?></td>
                       <td><?php echo $d['nama_lokasi'] ?></td>

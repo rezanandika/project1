@@ -24,6 +24,7 @@ if($state == "edit"){
 }
 
 ?>
+<link rel="stylesheet" href="<?php echo base_url('template/admin_lte/'); ?>/plugins/iCheck/all.css">
 
  <div class="row">
             
@@ -131,7 +132,7 @@ if($state == "edit"){
                                               if($id_office == $o->id_office) $sel="selected";
                                             }
                                              ?>
-                                            }
+                                           
                                             <tr align="left">
                                             <option value="<?= $o->id_office ?>" <?= $sel ?>><?php echo $o->nama_office ?></option>
                                             <?php } ?>
@@ -142,7 +143,30 @@ if($state == "edit"){
                                       <label for="inputPassword3" class="col-sm-2 control-label">Lain-lain</label>
 
                                       <div class="col-sm-8">
-                                        <textarea class="form-control" id="lain" name="lain"></textarea>
+                                        <!-- Button trigger modal -->
+                                        <?php foreach ($lain as $ln) { 
+                                          $sel=''; $hide=""; if(isset($id_detail)){
+                                            foreach ($brglain as $xx) {
+                                              if($xx['id_lain'] == $ln['id_lain'])$sel="checked";#
+                                                
+                                                $hide .='<input type="hidden" name="deletebarang" value="';
+                                                $hide .=$xx['idlainbarang'];
+                                                $hide .= '">';
+                                                
+                                              
+                                          }
+                                        ?>
+                                        <div class="col-md-6">
+                                          <div class="row">
+                                              <div class="checkbox">
+                                              <label>
+                                                <?= $hide ?>
+                                                <input type="checkbox" name="checks[]" value="<?= $ln['id_lain'] ?>" class="minimal" <?= $sel; ?>> <?= $ln['deskripsi'] ?>
+                                                </label>
+                                              </div>
+                                         </div>
+                                        </div>
+                                        <?php } } ?>
                                       </div>
                                     </div>
                                     <div class="form-group">
@@ -228,12 +252,32 @@ if($state == "edit"){
           </div>   <!-- /.row -->
 
 
-<script src="<?php echo base_url('template/admin_lte/'); ?>/plugins/ckeditor/ckeditor.js"></script>
+<!-- <script src="<?php echo base_url('template/admin_lte/'); ?>/plugins/ckeditor/ckeditor.js"></script> -->
+<script src="<?php echo base_url('template/admin_lte/'); ?>/plugins/iCheck/iCheck.min.js"></script>
 <script>
   $(function () {
     // Replace the <textarea id="editor1"> with a CKEditor
     // instance, using default configuration.
-    CKEDITOR.replace('editor1');
+    // CKEDITOR.replace('editor1');
     //bootstrap WYSIHTML5 - text editor
+
+     //iCheck for checkbox and radio inputs
+        // $('input[type="checkbox"].minimal').iCheck({
+        //   checkboxClass: 'icheckbox_minimal-blue',
+        //   // radioClass: 'iradio_minimal-blue'
+        // });
+       
+        // $(".minimal").on("click", function () {
+        //   // body...
+        // // var checks =  document.getElementsByClassName('minimal').checked;
+
+
+        // })
   });
+
 </script>
+
+
+
+
+
