@@ -11,7 +11,6 @@ class Barang extends MY_Controller {
   $this->load->module('kategori');
   // $this->load->module('inventaris');
   $this->load->model('Kategori_model', 'ktg');
-  $this->load->model('Detail_model','detail');
   $this->load->model('lain_model','ln');
   $this->load->model('Baranglain_model','brgln');
 
@@ -27,6 +26,8 @@ class Barang extends MY_Controller {
     $this->db->join('inventaris','inventaris.id_inventaris = barang.id_inventaris');
 	  $this->db->join('kategori','kategori.id_kategori = barang.id_kategori');
     $data['barang'] = $this->barang->get_all();
+
+                     
   	$data['tittle'] = "Data Barang";
   	$data['content'] = "Barang/data_barang";
     $this->template->views($data);
@@ -83,6 +84,7 @@ class Barang extends MY_Controller {
     $data['id_kategori'] = $datas['kategori'];
     $data['satuan'] = $datas['satuan'];
     $data['jumlah'] = $datas['jumlah'];
+    $data['distribusi'] = $datas['jumlah'];
     $data['id_inventaris'] = $datas['inventaris'];
 
     $this->barang->insert($data);
@@ -96,10 +98,10 @@ class Barang extends MY_Controller {
 
     $query['id_detail'] = $datas['idbarang'].".".$n;
     $query['id_barang'] = $datas['idbarang'];
-    $query['nama_detail'] = $datas['namabarang'];
-    $query['spesifikasi'] = $datas['spesifikasi'];
-    $query['id_kategori'] = $datas['kategori'];
-    $query['id_inventaris'] = $datas['inventaris'];
+    // $query['nama_detail'] = $datas['namabarang'];
+    // $query['spesifikasi'] = $datas['spesifikasi'];
+    // $query['id_kategori'] = $datas['kategori'];
+    // $query['id_inventaris'] = $datas['inventaris'];
 
         $this->detail->insert($query);
 
@@ -238,27 +240,27 @@ class Barang extends MY_Controller {
 
      $this->redirect_url_id = base_url()."index.php/barang/detail/?id=".$data['id_barang'];
 
+     $query = $this->detail->get_by(array("id_detail" => $id));
+     $status_distribusi="";
+     // memberi nilai pada status distribusi
+     if ($data['id_penempatan'] == "pilih") {
+          $status_distribusi .= 0;
+     }else{
+          $status_distribusi .= $query['status_distribusi'] + 1;
+     }
+
     $this->db->trans_start();
     $datas = array(
             "id_antivirus" => $data['id_antivirus'],
             "id_windows" => $data['id_windows'],
             "id_office" => $data['id_office'], 
             "IP" => $data['ip'],
+            "status_distribusi" => $status_distribusi,
             "id_penempatan" => $data['id_penempatan']
         );
 
+    
 
-    // $delete = array();
-    // if(!empty($data['deletebarang'])){
-    // foreach ($data['deletebarang'] as $deleteid) {
-
-    //   // array_push($delete, array('idlainbarang' => $deleteid));
-    //   }
-    // }
-
-
-    // if(!empty($delete))
-    // $this->brgln->delete_many($delete);
 
     $lain = array();
     if(!empty($data['checks'])){
@@ -272,6 +274,22 @@ class Barang extends MY_Controller {
     $this->brgln->delete_by(array('id_detail' => $id)); 
     if(!empty($lain))
     $this->brgln->insert_batch($lain);
+
+    //proses mengurangi stok barang
+    $door = $this->detail->get_by(array("id_detail" => $id));
+    $brg = $this->barang->get_by(array("id_barang" => $data['id_barang']));
+    $stok=0;
+    if ($door['id_penempatan'] != NULL & $door['status_distribusi'] == 1) {
+            $stok = 1;
+            $push = $brg['distribusi'] - $stok;
+    }elseif ($door['status_distribusi'] == 0) {
+        $stok = 1;
+        $push = $brg['distribusi'] + $stok;
+    }
+   
+    
+    $ekse = array("distribusi" => $push);
+    $this->barang->update($data['id_barang'],$ekse);
 
     $this->db->trans_complete();
 

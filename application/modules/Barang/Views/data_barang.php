@@ -21,6 +21,7 @@
                   <th>Kategori</th>
                   <th>Jumlah</th>
                   <th>Satuan</th>
+                  <th>Stok Barang</th>
                   <th>Jenis Inventaris</th>
                   <th>Detail</th>
                   <th>Aksi</th>
@@ -36,6 +37,7 @@
                       <td><?php echo $d['nama_kategori'] ?></td>
                       <td><?php echo $d['jumlah'] ?></td>
                       <td><?php echo $d['satuan'] ?></td>
+                      <td><?php if($d['distribusi'] == 0){ echo "Stok Habis";}else{ echo $d['distribusi']." Tersedia"; } ?></td>
                       <td><?php echo $d['nama_inventaris'] ?></td>
                       <td><a href="<?php echo base_url()."index.php/barang/detail/?id=".$d['id_barang']; ?>">Lihat</a></td>
                       <td><a href="<?php echo base_url(). 'index.php/barang/edit/?id=' .$d['id_barang'] ?>" title="Edit"><i class="fa fa-pencil text-primary"></i></a> 
